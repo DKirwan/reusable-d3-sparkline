@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>D3.js Sparkline</title>
+    <style>
+      path {
+        stroke-width: 1;
+        fill: none;
+      }
+      label {
+        float: left;
+        margin-top: 5px;
+        margin-right: 5px;
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      <label>Ryanair stock price Feb. 2015 -> Feb. 2016</label>
+      <!-- container for the chart -->
+      <div id="ryanair-stock-chart"></div>
+    </div>
+    <div class="container">
+      <label>Easyjet stock price Feb. 2015 -> Feb. 2016</label>
+      <!-- container for the chart -->
+      <div id="easyjet-stock-chart"></div>
+    </div>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="../sparkline.js"></script>
+    <script type="text/javascript">
+      var ryanairStockChart = sparkline()
+                                .width(155)
+                                .height(50)
+                                .gradientColors(['green', 'orange', 'red']) // top -> bottom
+                                .csvFilePath('ry4c.csv') // relative to sparkline.js
+                                .selector('#ryanair-stock-chart');
+      var easyjetStockChart = sparkline()
+                                .width(155)
+                                .height(50)
+                                .gradientColors(['green', 'orange', 'red']) // top -> bottom
+                                .csvFilePath('ezj.csv') // relative to sparkline.js
+                                .selector('#easyjet-stock-chart');
+      ryanairStockChart();  // render the chart
+      easyjetStockChart();
+    </script>
+  </body>
+
+</html>
