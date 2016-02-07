@@ -30,4 +30,3 @@ chart2();
 ## Pull Requests and issues
 
 ...are very welcome!
->>>>>>> release/0.1.0
