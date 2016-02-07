@@ -60,7 +60,7 @@ function sparkline() {
     // Define the line
     var valueline = d3.svg.line()
       .x(function (d) { return x(d.date); })
-      .y(function (d) { return y(d.close); });
+      .y(function (d) { return y(d.count); });
 
     // Adds the svg canvas to the selector - 'body' by default
     var svg = d3.select(chart.selector())
@@ -93,12 +93,12 @@ function sparkline() {
     d3.csv(chart.csvFilePath(), function onCsvFileLoaded(error, data) {
       data.forEach(function(d) {
         d.date = parseDate(d.date);
-        d.close = +d.close;
+        d.count = +d.count;
       });
 
       // Scale the range of the data
       x.domain(d3.extent(data, function (d) { return d.date; }));
-      y.domain([0, d3.max(data, function (d) { return d.close; })]);
+      y.domain([0, d3.max(data, function (d) { return d.count; })]);
 
       // Add the valueline path.
       svg.append('path')
