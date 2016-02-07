@@ -6,10 +6,10 @@ This chart was built with Mike Bostock's [reusable D3.js charts best practice](h
 
 ## How to use
 
-Load the sparkline.js code
+1: Load the sparkline.js code
 `<script src="path/to/sparkline.js"></script>`
 
-Then configure the chart and render it.
+2: Then configure the chart and render it
 ```javascript
 var chart1 = sparkline()
               .width(155)
