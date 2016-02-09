@@ -35,16 +35,19 @@
                                 .width(155)
                                 .height(50)
                                 .gradientColors(['green', 'orange', 'red']) // top -> bottom
-                                .csvFilePath('ry4c.csv') // relative to sparkline.js
+                                .dataSource('ry4c.csv') // relative to sparkline.js
+                                .dataSourceType('CSV') // relative to sparkline.js
                                 .selector('#ryanair-stock-chart');
       var easyjetStockChart = sparkline()
                                 .width(155)
                                 .height(50)
                                 .gradientColors(['green', 'orange', 'red']) // top -> bottom
-                                .csvFilePath('ezj.csv') // relative to sparkline.js
+                                .dataSource('ezj.tsv') // relative to sparkline.js
+                                .dataSourceType('TSV') // relative to sparkline.js
                                 .selector('#easyjet-stock-chart');
       ryanairStockChart();  // render the chart
       easyjetStockChart();
+
     </script>
   </body>
 

@@ -4,7 +4,8 @@ function sparkline() {
   // defaults
   var width = 175;
   var height = 56;
-  var csvFilePath = '';
+  var dataSource = '';
+  var dataSourceType = '';
   var selector = 'body';
   var gradientColors = ['green', 'orange', 'red'];
 
@@ -21,9 +22,15 @@ function sparkline() {
     return chart;
   };
 
-  chart.csvFilePath = function(value) {
-    if (!arguments.length) return csvFilePath;
-    csvFilePath = value;
+  chart.dataSource = function(value) {
+    if (!arguments.length) return dataSource;
+    dataSource = value;
+    return chart;
+  };
+
+  chart.dataSourceType = function(value) {
+    if (!arguments.length) return dataSourceType;
+    dataSourceType = value;
     return chart;
   };
 
@@ -50,9 +57,6 @@ function sparkline() {
     var width = chart.width();
     var height = chart.height();
     var gradient;
-
-    // date parser
-    var parseDate = d3.time.format('%d-%b-%y').parse;
 
     var x = d3.time.scale().range([0, width]);
     var y = d3.scale.linear().range([height, 0]);
@@ -90,9 +94,22 @@ function sparkline() {
     }
 
     // load CSV file - defaults to ryanair stock prices on the Irish stock exchange from Feb 2015 - Feb 2016
-    d3.csv(chart.csvFilePath(), function onCsvFileLoaded(error, data) {
-      data.forEach(function(d) {
-        d.date = parseDate(d.date);
+    if (chart.dataSourceType().toLowerCase() === 'csv') {
+      d3.csv(chart.dataSource(), drawChart);
+    } else if (chart.dataSourceType().toLowerCase() === 'tsv') {
+      d3.tsv(chart.dataSource(), drawChart);
+    } else {
+      d3.json(chart.dataSource(), drawChart);
+    }
+
+    /*
+    * formats chart data and appends the sparkline
+    */
+    function drawChart(error, data) {
+      if (error) { return; }
+
+      data.forEach(function (d) {
+        d.date = new Date(d.date);
         d.count = +d.count;
       });
 
@@ -110,7 +127,8 @@ function sparkline() {
           return '#444444';
         })
         .attr('d', valueline(data));
-    });
+
+    }
   }
 
   return chart;
