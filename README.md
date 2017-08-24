@@ -32,7 +32,7 @@ As long as `new Date()` can parse the date string it's ok.
 var chart1 = sparkline()
               .width(155)
               .height(50)
-              .gradientColors(['lightblue', 'steelblue', 'blue', navy]) // top -> bottom
+              .gradientColors(['lightblue', 'steelblue', 'blue', 'navy']) // top -> bottom
               .dataSource('ry4c.csv') // relative to sparkline.js
               .dataSourceType('CSV')
               .selector('#chart-one');
